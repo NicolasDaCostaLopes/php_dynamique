@@ -1,6 +1,27 @@
 <?php
     require_once("header.php");
-    require_once("../controller/loginController.php");
+    require_once('../database/queries.php');
+    
+
+    if(!empty($_POST)){
+        if(!empty($_POST["email"])&& !empty($_POST["password"])){
+            $email=$_POST["email"];
+            $password=$_POST["password"];
+            $getUserVerified=userLoginQuery($email,$password);
+            var_dump($getUserVerified);
+            if(!$getUserVerified){
+                return "user not found";
+            }
+            if($getUserVerified){
+               
+                $_SESSION["user"]=$getUserVerified;
+                header('location:home_page.php?welcome=Bienvenue'." ".$_SESSION["user"]["firstname"]);
+               
+            }
+
+          
+        }
+    }
    
 ?>
 
@@ -20,7 +41,7 @@
             <form method="post">
                 <div class="form-group col-4 offset-4">
                     <label for="email"> Email </label>
-                    <input type="text" class="form-control" name="email"/>
+                    <input type="email" class="form-control" name="email"/>
                 </div>
 
                 <div class="form-group col-4 offset-4">

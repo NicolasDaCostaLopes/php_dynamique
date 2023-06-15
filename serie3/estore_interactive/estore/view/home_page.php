@@ -1,7 +1,7 @@
 <?php
  require_once('./header.php');
  require_once('../controller/homePageController.php');
- require_once('../controller/productController.php');
+ require_once("../database/queries.php");
  
 
 ?>

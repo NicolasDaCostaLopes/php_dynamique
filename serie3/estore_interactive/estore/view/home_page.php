@@ -3,7 +3,8 @@
  require_once('../controller/homePageController.php');
  require_once("../database/queries.php");
  
-
+$password="password";
+echo password_hash($password, PASSWORD_BCRYPT);
 ?>
 
 <!DOCTYPE html>
@@ -16,15 +17,37 @@
 
     <body style="background:#fafdfe;">
         <div class="container"> 
-            <?php
-                if(isset($_GET["welcome"])):?>
-                    <h4 class="text-center text-success"> <?php echo $_GET["welcome"] ?> </h4>
-                <?php endif ?>
-            
-           
+            <?php if(isset($_GET["welcome"])):?>
+                <h4 class="text-center text-success"> <?php echo $_GET["welcome"] ?> </h4>
+            <?php endif ?>
+            <div class="d-flex">
+                <?php foreach (getAllArticle() as $value): ?>
+
+                    <div class="card" style="width: 18rem;">
+
+                        <img src="<?php echo $value["photo"] ?>" class="card-img-top" alt="jetski">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $value["title"] ?></h5>
+                            <p class="card-text"><?php echo $value["description"] ?></p>
+                            <?php if($value["is_flagged"]):?>
+                                <p class="btn btn-danger" >Product Flagged</p> 
+
+                            <?php else:?>
+                                <?php if($value["quantity"] > 0): ?>
+                                    <a href="product_details.php?id=<?php echo $value["id"]; ?>" class="btn btn-primary">Voir détails</a>
+                                <?php else:?>
+                                    <p class="btn btn-danger" >No dispo</p>                           
+                                <?php endif?>
+                            <?php endif ?>
+                            
+                        </div>
+                    </div>
+                <?php endforeach ?>
+            </div>
+
            <!--
             PARTIE 1
-                 Dans un premier temps, trouvez un moyen d'afficher tous nos produits (il  va falloir recuperer nos produits dans la base de données et les afficher ici). Pour ce faire, ecrivez votre requete dans le fichier queires.php avec une fonction, et ensuite faites appel a cette fonction que vous avez ecrit dans queries.php dans votre productController.php qui aura pour but d'afficher tous nos produits.  Affichez le titre, la description  et la photo du produit. Utilisez la classe card de bootstrap pour vous faciliter le travail. 
+                 Dans un premier temps, trouvez un moyen d'afficher tous nos produits (il  va falloir recuperer nos produits dans la base de données et les afficher ici). Pour ce faire, ecrivez votre requete dans le fichier queires.php avec une fonction, et ensuite faites appel a cette fonction que vous avez ecrit dans queries.php dans votre home_page.php qui aura pour but d'afficher tous nos produits.  Affichez le titre, la description  et la photo du produit. Utilisez la classe card de bootstrap pour vous faciliter le travail. 
             PARTIE 2
 
                  Aprés avoir pu recuperer les produits et les affichez:

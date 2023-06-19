@@ -57,6 +57,70 @@ function addUserQuery($firstname,$lastname,$email,$hash){
     }
 }
 
+function getAllArticle(){
+    try{
+        $dbConnector=connect();
+        $sql="SELECT * FROM products";
+        $statement=$dbConnector->prepare($sql);
+        $statement->execute();
+        $allArticle=$statement->fetchAll(PDO::FETCH_ASSOC);
+        return $allArticle;
+    }
+    
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    
+}
+
+function getArticleById($id){
+    try{
+        $dbConnector=connect();
+        $sql="SELECT * FROM products WHERE id = ?";
+        $statement=$dbConnector->prepare($sql);
+        $statement->execute([$id]);
+        $Article=$statement->fetch(PDO::FETCH_ASSOC);
+        return $Article;
+    }
+    
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    
+}
+
+function getUserById($id){
+    try{
+        $dbConnector=connect();
+        $sql="SELECT * FROM users WHERE id = ?";
+        $statement=$dbConnector->prepare($sql);
+        $statement->execute([$id]);
+        $User=$statement->fetch(PDO::FETCH_ASSOC);
+        return $User;
+    }
+    
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    
+}
+
+function switchArticleFlag($sentFlag,$id){
+    try{
+        $dbConnector=connect();
+        $sql="UPDATE products SET is_flagged = ? WHERE id = ?";
+        $statement=$dbConnector->prepare($sql);
+        $statement->execute([$sentFlag,$id]);
+        $User=$statement->fetch(PDO::FETCH_ASSOC);
+        return $User;
+    }
+    
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+    
+}
+
 // ECRIVEZ ICI UNE FONCTION POUR INSERER NOS UTILSATEURS
 
 // ECRIVEZ ICI UNE FONCTION POUR RECUPERER TOUS NOS PRODUITS 

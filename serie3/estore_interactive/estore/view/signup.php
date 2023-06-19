@@ -13,7 +13,7 @@ if(!empty($_POST)){
     if(!empty($firstname) && !empty($lastname) && !empty($email) && !empty($password)){
         $hashedPassword=password_hash($password,PASSWORD_BCRYPT);
 
-        $isUserInserted = insertUser($firstname, $lastname, $email, $hashedPassword);
+        $isUserInserted = addUserQuery($firstname, $lastname, $email, $hashedPassword);
     }else{
         $errorMsg= "Erreur de saisie";
     }

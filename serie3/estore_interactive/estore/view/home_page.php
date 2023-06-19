@@ -39,6 +39,9 @@ echo password_hash($password, PASSWORD_BCRYPT);
                                     <p class="btn btn-danger" >No dispo</p>                           
                                 <?php endif?>
                             <?php endif ?>
+                            <?php if(($_SESSION["user"]["role"] === "admin") && ((!$value["quantity"] > 0) || ($value["is_flagged"]))):?>
+                                <a href="product_details.php?id=<?php echo $value["id"]; ?>" class="btn btn-primary">Voir détails</a>
+                            <?php endif?>
                             
                         </div>
                     </div>

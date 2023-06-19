@@ -3,7 +3,7 @@
  require_once("../database/queries.php");
 
 
- if (!empty($_GET["sentFlag"]) && isset($_GET["sentFlag"])) {
+ if (isset($_GET["sentFlag"])) {
     switchArticleFlag($_GET["sentFlag"],$_GET["id"]);
  }
 ?>

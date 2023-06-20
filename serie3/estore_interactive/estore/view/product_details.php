@@ -40,6 +40,15 @@
                         <a class="btn btn-danger" href="?sentFlag=1&id=<?php echo $article["id"];?>">Set flag to 1</a>  
                     <?php endif ?>
 
+                    <!--
+                        Sur cette page, rajoutez un lien pour pouvoir laisser un commentaire sur le produit en particulier. Ce lien doit pointer vers la page pour rajouter un commentaire
+                    -->
+
+                    <!--
+                        Sur cette page, rajoutez un lien pour pouvoir consulter tous les commentaires liés a ce produit
+                    -->
+                
+
 
 
 
